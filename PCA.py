@@ -1,19 +1,17 @@
 import numpy as np
 from os import listdir
-import cv2
-
-def imread_txt(path):
-    f = open(path)
-    img = []
-    for line in f:
-        img.append([(0 if int(item)==0 else 255) for item in line.strip()])
-    return np.array(img,dtype=np.uint8)
 
 def read_img(path):
+    """
+    read and convert data from img
+    """
     data = open(path).read().replace("\n","")
     return np.array([int(item) for item in data])
 
 def PCA():
+    '''
+    PCA procedure
+    '''
     path = "D:/digits/testDigits"
     ims = []
     for pim in listdir(path):
@@ -24,8 +22,7 @@ def PCA():
     for i in range(len(cov)):
         div.append(cov[i]/946)
     
-    print(len(np.linalg.eig(div)[1]))
+    print(np.linalg.eig(div))
 
-cv2.imshow('',imread_txt("D:/digits/testDigits/0_0.txt"))
-cv2.waitKey(0)
+
 PCA()
